@@ -78,7 +78,7 @@ ColumnLayout {
             valueRole: "value"
             model: ListModel{
                 ListElement { text: "English"; value: "en-US" }
-                ListElement { text: "简体中文"; value: "zh-CN" }
+                ListElement { text: "CHINESE"; value: "zh-CN" }
             }
             background: Rectangle {
                 color: Qt.rgba(255, 255, 255, .1)

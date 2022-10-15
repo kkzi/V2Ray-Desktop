@@ -2,7 +2,7 @@
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQml.Models 2.15
-import QtQuick.Dialogs
+import QtQuick.Dialogs 2.15
 
 import com.v2ray.desktop.AppProxy 2.4
 

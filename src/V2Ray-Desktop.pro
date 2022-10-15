@@ -40,7 +40,7 @@ SOURCES += \
     v2raycore.cpp
 
 include(3rdparty/qzxing/src/QZXing.pri)
-LIBS += -lz
+#LIBS += -lz
 
 RESOURCES += qml.qrc
 
