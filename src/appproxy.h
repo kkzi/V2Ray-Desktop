@@ -4,7 +4,6 @@
 #include <QJsonObject>
 #include <QMap>
 #include <QObject>
-#include <QQmlEngine>
 #include <QString>
 #include <QThread>
 #include <QTranslator>
@@ -20,7 +19,7 @@ class AppProxy : public QObject {
 
  public:
   AppProxy(QObject* parent = 0);
-  ~AppProxy();
+  virtual ~AppProxy();
 
  signals:
   void getServerLatencyStarted(QJsonArray servers);

@@ -10,8 +10,6 @@
 #include <QJsonDocument>
 #include <QNetworkProxy>
 #include <QPixmap>
-#include <QQmlContext>
-#include <QQmlEngine>
 #include <QRegularExpression>
 #include <QScreen>
 #include <QSettings>
@@ -173,10 +171,10 @@ void AppProxy::setAppConfig(QString configString) {
   }
   // Set auto start and update UI language
   setAutoStart(appConfig["autoStart"].toBool());
-  retranslate(appConfig["language"].toString());
+  // retranslate(appConfig["language"].toString());
   // Save app config
-  appConfig["httpPort"]  = appConfig["httpPort"].toString().toInt();
-  appConfig["socksPort"] = appConfig["socksPort"].toString().toInt();
+  appConfig["httpPort"]  = appConfig["httpPort"].toInt();
+  appConfig["socksPort"] = appConfig["socksPort"].toInt();
   configurator.setAppConfig(appConfig);
   qInfo() << "Application config updated. Restarting V2Ray ...";
   // Restart V2Ray Core
@@ -203,7 +201,7 @@ QStringList AppProxy::getAppConfigErrors(const QJsonObject& appConfig) {
                                                tr("HTTP Port"), 1, 65535));
   errors.append(Utility::getNumericConfigError(appConfig, "socksPort",
                                                tr("SOCKS Port"), 1, 65535));
-  if (appConfig["httpPort"].toString() == appConfig["socksPort"].toString()) {
+  if (appConfig["httpPort"].toInt() == appConfig["socksPort"].toInt()) {
     errors.append(tr("'HTTP Port' and 'SOCKS Port' can not be the same."));
   }
   errors.append(Utility::getStringConfigError(
@@ -227,7 +225,7 @@ bool AppProxy::retranslate(QString language) {
     QString("%1/%2.qm").arg(Configurator::getLocaleDirPath(), language));
 
   app->installTranslator(&translator);
-  QQmlEngine::contextForObject(this)->engine()->retranslate();
+  //QQmlEngine::contextForObject(this)->engine()->retranslate();
   return isTrLoaded;
 }
 
