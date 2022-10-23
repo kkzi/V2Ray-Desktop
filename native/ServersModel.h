@@ -74,6 +74,29 @@ public:
         }
     }
 
+    std::optional<ServerItem> item(const QModelIndex &index)
+    {
+        if (!index.isValid())
+        {
+            return std::nullopt;
+        }
+        return servers_.value(index.row());
+    }
+
+    void updateItemStatus(const QString &name, bool isConnected)
+    {
+        for (auto i = 0; i < servers_.size(); ++i)
+        {
+            auto &it = servers_[i];
+            if (it.name == name)
+            {
+                it.status = isConnected ? ServerItem::Status::Connected : ServerItem::Status::Disconnected;
+                emit dataChanged(index(i, 2), index(i, 3), { Qt::DisplayRole });
+                break;
+            }
+        }
+    }
+
     int width(int col) const
     {
         static QList<int> widths{ 190, 240, 120 };

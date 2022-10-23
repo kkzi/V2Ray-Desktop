@@ -34,7 +34,7 @@ static void MessageHandler(QtMsgType msgType, const QMessageLogContext &context,
     }
 }
 
-int main(int argc, char **argv)
+int WinMain(int argc, char **argv)
 {
     auto a = ClashApp::init(argc, argv);
     a->setStyleSheet("file:///:/native.css");

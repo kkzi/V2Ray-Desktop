@@ -47,7 +47,9 @@ public:
         layout->addLayout(stack_, 1);
 
         connect(subsbar_, &QToolBar::actionTriggered, this, &ServersPage::showOrCreateSubscription);
+        connect(serverTable_, &QTableView::doubleClicked, this, &ServersPage::toggleServer);
         connect(ClashApp::proxy, &AppProxy::serversReady, this, &ServersPage::updateServers);
+        connect(ClashApp::proxy, &AppProxy::serverConnectivityChanged, this, &ServersPage::updateServerStatus);
         ClashApp::proxy->getServers();
     }
 
@@ -73,6 +75,17 @@ private:
         auto id = action->data().toString();
         bool isCreation = id == "creation";
         stack_->setCurrentIndex(isCreation ? 0 : 1);
+    }
+
+    void toggleServer(const QModelIndex &index)
+    {
+        auto server = model_->item(index);
+        if (!server)
+        {
+            return;
+        }
+        auto isConnected = server->status == ServerItem::Status::Connected;
+        ClashApp::proxy->setServerConnection(server->name, !isConnected);
     }
 
     void updateServers(const QString &text)
@@ -109,6 +122,11 @@ private:
         model_->setupData(std::move(servers));
         stack_->setCurrentIndex(1);
         // subsbar_->actions().first()->trigger();
+    }
+
+    void updateServerStatus(const QString &name, bool isConnecetd)
+    {
+        model_->updateItemStatus(name, isConnecetd);
     }
 
 private:

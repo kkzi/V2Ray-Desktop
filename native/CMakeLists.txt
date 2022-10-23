@@ -15,8 +15,9 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS} ${Qt5Network_INCLUDE_DIRS})
 include_directories(../src)
 
 file(GLOB CORE_SRCS ../src/*.h ../src/*.cpp)
-file(GLOB NATIVE_SRCS *.h *.cpp *.ui *.qrc)
+file(GLOB NATIVE_SRCS *.h *.cpp *.ui *.qrc *.rc)
 
 list(REMOVE_ITEM CORE_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/../src/main.cpp)
-add_executable(${PROJECT_NAME} ${CORE_SRCS} ${NATIVE_SRCS})
+add_executable(${PROJECT_NAME} WIN32 ${CORE_SRCS} ${NATIVE_SRCS})
 target_link_libraries(${PROJECT_NAME} Qt::Widgets Qt::Network OpenSSL::SSL OpenSSL::Crypto)
+

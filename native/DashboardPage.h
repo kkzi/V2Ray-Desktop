@@ -93,10 +93,10 @@ private:
         auto text = tr("System Proxy\t%1\nProxy Mode\t%2\nClash Core\t%3")
                         .arg(obj.value<std::string>("systemProxy", "").c_str())
                         .arg(obj.value<std::string>("proxyMode", "").c_str())
-                        .arg(obj.value<bool>("isV2RayRunning", false) ? tr("Running\nConnected Servers: %1").arg([arr = obj.at("connectedServers")] {
+                        .arg(obj.value<bool>("isV2RayRunning", false) ? tr("Running\nConnected Servers\n%1").arg([arr = obj.at("connectedServers")] {
                             QStringList lines;
                             std::transform(arr.begin(), arr.end(), std::back_inserter(lines), [](auto &&it) {
-                                return QString("- %1").arg("");
+                                return QString("\t- %1").arg(std::string(it).c_str());
                             });
                             return lines.isEmpty() ? tr("Please connect to at least one server!") : lines.join("\n");
                         }())

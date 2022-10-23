@@ -10,7 +10,19 @@
             "cmakeCommandArgs": "",
             "buildCommandArgs": "",
             "ctestCommandArgs": "",
-            "cmakeToolchain": "D:/Local/vcpkg/scripts/buildsystems/vcpkg.cmake"
+            "cmakeToolchain": "C:/Local/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        },
+        {
+            "name": "x64-Release",
+            "generator": "Ninja",
+            "configurationType": "Release",
+            "buildRoot": "${projectDir}\\out\\build\\${name}",
+            "installRoot": "${projectDir}\\out\\install\\${name}",
+            "cmakeCommandArgs": "",
+            "buildCommandArgs": "",
+            "ctestCommandArgs": "",
+            "inheritEnvironments": [ "msvc_x64_x64" ],
+            "cmakeToolchain": "C:/Local/vcpkg/scripts/buildsystems/vcpkg.cmake"
         }
     ]
 }

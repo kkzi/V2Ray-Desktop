@@ -4,11 +4,13 @@
 #include "libs/httplib.h"
 #include "libs/json.hpp"
 #include <QDebug>
+#include <filesystem>
 #include <qsystemdetection.h>
 #include <string>
 #include <tuple>
 
 using json = nlohmann::json;
+namespace fs = std::filesystem;
 
 static std::tuple<std::string, std::string> parse_url(const std::string &url)
 {
@@ -58,6 +60,8 @@ public:
             qCritical() << (int)result.error();
             return;
         }
+        // https://github.com/Dreamacro/clash/releases/download/v1.11.8/clash-windows-amd64-v1.11.8.zip
+        std::string download_url;
         auto arr = json::parse(result->body);
         for (auto &&it : arr.value<json>("assets", json::array()))
         {
@@ -65,12 +69,26 @@ public:
             auto url = it.value<std::string>("browser_download_url", "");
             if (name.find(platform) != std::string::npos)
             {
-                auto result = http_get(url);
+                download_url = url;
                 break;
             }
-
-            //"": "https://github.com/Dreamacro/clash/releases/download/v1.11.8/clash-windows-amd64-v1.11.8.zip"
         }
+        if (download_url.empty())
+        {
+            qCritical() << "get download url failed";
+            return;
+        }
+
+        result = http_get(download_url);
+        if (!result)
+        {
+            qCritical() << "download core failed";
+            return;
+        }
+        fs::create_directories("./clash-core");
+        std::ofstream core("./clash-core/clash.exe", std::ios::binary | std::ios::trunc);
+        core.write(result->body.data(), result->body.size());
+        core.close();
     }
 
 signals:
