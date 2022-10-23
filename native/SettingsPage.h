@@ -31,7 +31,7 @@ public:
 public:
     QIcon icon() const override
     {
-        return {};
+        return QIcon(":/images/icon-settings.svg");
     }
 
     QString title() const override
@@ -51,7 +51,7 @@ private:
         ui_.DnsServers->setText(obj.value<std::string>("dns", "8.8.8.8; 4.4.4.4").c_str());
         ui_.SocksPort->setValue(obj.value<int>("socksPort", 1080));
         ui_.HttpPort->setValue(obj.value<int>("httpPort", 1087));
-        ui_.GfwUrl->setText(obj.value<std::string>("gfwListUrl", DEFAULT_GFWLIST_URL).c_str());
+        ui_.GfwUrl->setPlainText(obj.value<std::string>("gfwListUrl", DEFAULT_GFWLIST_URL).c_str());
     }
 
     void updateSettings()
@@ -63,7 +63,7 @@ private:
             { "defaultSysProxyProtocol", "http" },
             { "dns", ui_.DnsServers->text().toStdString() },
             //{ "gfwListLastUpdated", "Never" },
-            { "gfwListUrl", ui_.GfwUrl->text().toStdString() },
+            { "gfwListUrl", ui_.GfwUrl->toPlainText().toStdString() },
             { "httpPort", ui_.HttpPort->value() },
             { "socksPort", ui_.SocksPort->value() },
             { "language", ui_.LanguageBox->currentText().toStdString() },

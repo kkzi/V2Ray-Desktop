@@ -11,6 +11,9 @@
 ClashAppMainWindow::ClashAppMainWindow()
 {
     ui_.setupUi(this);
+    ui_.Logo->setPixmap(QPixmap(":/images/logo.png").scaledToHeight(48, Qt::SmoothTransformation));
+    ui_.Logo->setContentsMargins(10, 10, 6, 10);
+    ui_.TitleLayout->setContentsMargins(10, 18, 10, 18);
 
     addPage(new DashboardPage);
     addPage(new ServersPage);
@@ -22,7 +25,7 @@ ClashAppMainWindow::ClashAppMainWindow()
     connect(ui_.Nav->selectionModel(), &QItemSelectionModel::currentRowChanged, this, [this](auto &&index) {
         auto id = index.row();
         auto page = (Page *)ui_.Stack->widget(id);
-        ui_.Icon->setPixmap(page->icon().pixmap({ 48, 48 }));
+        ui_.Icon->setPixmap(page->icon().pixmap({ 32, 32 }));
         ui_.Title->setText(page->title());
         ui_.ToolBar->clear();
         ui_.ToolBar->addActions(page->actions());

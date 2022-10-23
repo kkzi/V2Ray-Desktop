@@ -28,8 +28,8 @@ QByteArray NetworkRequest::getNetworkResponse(QString url,
 
   request.setUrl(QUrl(url));
   request.setSslConfiguration(QSslConfiguration::defaultConfiguration());
-  request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
-                       QNetworkRequest::ManualRedirectPolicy);
+  //request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,
+                       //QNetworkRequest::ManualRedirectPolicy);
   qInfo() << "Start to get url: " << url;
   QNetworkReply* networkReply = accessManager.get(request);
   QEventLoop eventLoop;
@@ -51,7 +51,7 @@ QByteArray NetworkRequest::getNetworkResponse(QString url,
   // Network error Handler
   if (networkReply->error() != QNetworkReply::NoError) {
     qCritical() << "Error occurred during requsting " << url
-                << "; Error: " << networkReply->error();
+                << "; Error: " << networkReply->errorString();
     return QByteArray();
   }
   QByteArray responseBytes = networkReply->readAll();

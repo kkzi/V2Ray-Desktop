@@ -17,15 +17,16 @@ class DashboardPage : public Page
 
 public:
     DashboardPage(QWidget *parent = nullptr)
-        : Page(nullptr)
+        : Page(parent)
     {
         auto layout = new QVBoxLayout(this);
+        layout->setSpacing(15);
         layout->addWidget(new StatusItemPane(tr("Network Status"), network_ = new QLabel));
         layout->addWidget(new StatusItemPane(tr("Proxy Settings"), proxy_ = new QLabel));
         layout->addWidget(new StatusItemPane(tr("Operation System"), new QLabel(QSysInfo::prettyProductName())));
         layout->addWidget(new StatusItemPane(tr("App Version"), new QLabel(ClashApp::app->applicationVersion())));
-        layout->addWidget(new StatusItemPane(tr("Clash version"), clashVersion_ = new QLabel));
-        layout->addStretch();
+        layout->addWidget(new StatusItemPane(tr("Clash Version"), clashVersion_ = new QLabel));
+        layout->addStretch(1);
 
         connect(ClashApp::proxy, &AppProxy::networkStatusReady, this, &DashboardPage::updateNetworkStatus);
         connect(ClashApp::proxy, &AppProxy::proxySettingsReady, this, &DashboardPage::updateProxyStatus);
@@ -39,7 +40,7 @@ public:
 public:
     QIcon icon() const override
     {
-        return {};
+        return QIcon(":/images/icon-dashboard.svg");
     }
 
     QString title() const override
@@ -51,7 +52,6 @@ protected:
     void showEvent(QShowEvent *event) override
     {
         getLatestStatus();
-        return Page::showEvent(event);
     }
 
     void hideEvent(QHideEvent *event) override
@@ -90,7 +90,7 @@ private:
     void updateProxyStatus(const QString &status)
     {
         auto obj = json::parse(status.toStdString());
-        auto text = tr("System Proxy: %1\nProxy Mode: %2\nClash: %3\n")
+        auto text = tr("System Proxy\t%1\nProxy Mode\t%2\nClash Core\t%3")
                         .arg(obj.value<std::string>("systemProxy", "").c_str())
                         .arg(obj.value<std::string>("proxyMode", "").c_str())
                         .arg(obj.value<bool>("isV2RayRunning", false) ? tr("Running\nConnected Servers: %1").arg([arr = obj.at("connectedServers")] {
