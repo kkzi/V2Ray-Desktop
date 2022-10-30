@@ -9,6 +9,8 @@
 #include <qitemselectionmodel.h>
 
 ClashAppMainWindow::ClashAppMainWindow()
+    : tray_(new QSystemTrayIcon(this))
+    , menu_(new QMenu(this))
 {
     ui_.setupUi(this);
     ui_.Logo->setPixmap(QPixmap(":/images/logo.png").scaledToHeight(48, Qt::SmoothTransformation));
@@ -33,6 +35,15 @@ ClashAppMainWindow::ClashAppMainWindow()
         ui_.Stack->setCurrentWidget(page);
     });
     ui_.Nav->setCurrentRow(0);
+
+    connect(tray_, &QSystemTrayIcon::activated, this, [this](auto &&reason) {
+        activateWindow();
+        showNormal();
+    });
+
+    tray_->setIcon(QIcon(":/images/native_gray.ico"));
+    tray_->setContextMenu(menu_);
+    tray_->show();
 }
 
 void ClashAppMainWindow::addPage(Page *page)

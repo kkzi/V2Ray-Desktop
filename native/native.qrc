@@ -15,5 +15,7 @@
         <file>images/up.png</file>
         <file>images/down-arrow.png</file>
         <file>images/up-arrow.png</file>
+        <file>images/native.ico</file>
+        <file>images/native_gray.ico</file>
     </qresource>
 </RCC>
