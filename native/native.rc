@@ -17,7 +17,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "images\\native.ico"
+IDI_ICON1               ICON                    "theme\\light\\native.ico"
 
 
 #ifdef APSTUDIO_INVOKED

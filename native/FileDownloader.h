@@ -1,8 +1,7 @@
 #pragma once
 
-#define CPPHTTPLIB_OPENSSL_SUPPORT
-#include "libs/httplib.h"
-#include "libs/json.hpp"
+#include "httplib.h"
+#include "json.hpp"
 #include <QDebug>
 #include <filesystem>
 #include <qsystemdetection.h>

@@ -56,7 +56,7 @@ public:
 public:
     QIcon icon() const override
     {
-        return QIcon(":/images/icon-servers.svg");
+        return QIcon(QString(":/theme/%1/icon-servers.svg").arg(ClashApp::theme));
     }
 
     QString title() const override

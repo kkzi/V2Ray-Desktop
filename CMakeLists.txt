@@ -1,4 +1,4 @@
 project(ClashNative)
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.10)
 
 add_subdirectory(native)

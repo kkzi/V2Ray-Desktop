@@ -13,7 +13,7 @@ ClashAppMainWindow::ClashAppMainWindow()
     , menu_(new QMenu(this))
 {
     ui_.setupUi(this);
-    ui_.Logo->setPixmap(QPixmap(":/images/logo.png").scaledToHeight(48, Qt::SmoothTransformation));
+    ui_.Logo->setPixmap(QPixmap(QString(":/theme/%1/logo.png").arg(ClashApp::theme)).scaledToHeight(48, Qt::SmoothTransformation));
     ui_.Logo->setContentsMargins(10, 10, 6, 10);
     ui_.TitleLayout->setContentsMargins(10, 18, 10, 18);
 
@@ -41,15 +41,13 @@ ClashAppMainWindow::ClashAppMainWindow()
         showNormal();
     });
 
-    tray_->setIcon(QIcon(":/images/native_gray.ico"));
+    tray_->setIcon(QIcon(QString(":/theme/%1/native_gray.ico").arg(ClashApp::theme)));
     tray_->setContextMenu(menu_);
     tray_->show();
 }
 
 void ClashAppMainWindow::addPage(Page *page)
 {
-    Q_CHECK_PTR(page);
-
     ui_.Nav->addItem(new QListWidgetItem(page->icon(), page->title()));
     ui_.Stack->addWidget(page);
 }

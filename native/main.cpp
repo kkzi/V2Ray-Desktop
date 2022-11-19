@@ -1,3 +1,4 @@
+#include "ClashApi.h"
 #include "ClashApp.h"
 #include "ClashAppMainWindow.h"
 #include "configurator.h"
@@ -34,10 +35,14 @@ static void MessageHandler(QtMsgType msgType, const QMessageLogContext &context,
     }
 }
 
-int WinMain(int argc, char **argv)
+int main(int argc, char **argv)
 {
+    ClashApi api;
+    api.get_logs([](auto &&logs) {
+        logs.size();
+    });
     auto a = ClashApp::init(argc, argv);
-    a->setStyleSheet("file:///:/native.css");
+    a->setStyleSheet(QString("file:///:/theme/%1.css").arg(ClashApp::theme));
     q_check_ptr(a);
 
     qInstallMessageHandler(MessageHandler);

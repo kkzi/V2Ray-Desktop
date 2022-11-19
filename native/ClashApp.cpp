@@ -4,6 +4,8 @@
 #include <QStringList>
 #include <appproxy.h>
 
+QString ClashApp::theme{ "light" };
+
 QApplication *ClashApp::app = nullptr;
 AppProxy *ClashApp::proxy = nullptr;
 ClashAppMainWindow *ClashApp::window = nullptr;

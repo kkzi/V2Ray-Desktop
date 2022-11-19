@@ -40,7 +40,7 @@ public:
 public:
     QIcon icon() const override
     {
-        return QIcon(":/images/icon-dashboard.svg");
+        return QIcon(QString(":/theme/%1/icon-dashboard.svg").arg(ClashApp::theme));
     }
 
     QString title() const override

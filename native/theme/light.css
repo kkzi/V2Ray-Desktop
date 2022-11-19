@@ -1,0 +1,129 @@
+QWidget {
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
+    outline: none;
+}
+
+QListView, QTableView, QTableWidget {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+QTableView::item {
+    border-bottom: 1px solid #666;
+}
+
+    QTableView::item:selected {
+        background-color: #31587a;
+        color: #FFF;
+    }
+
+QHeaderView::section {
+    padding: 8px 0px 6px 6px;
+    background-color: #293846;
+    font-weight: bold;
+}
+
+QPushButton {
+    background-color: #3498db;
+    border: 0;
+    padding: 6px 8px 4px 8px;
+}
+
+    QPushButton:hover {
+        background-color: #44a8eb;
+    }
+
+    QPushButton:pressed {
+        background-color: #3478ab;
+    }
+
+    QPushButton:disabled {
+        background-color: transparent;
+        color: #999;
+    }
+
+#ServersPage QToolBar {
+    background-color: transparent;
+    spacing: 6px;
+}
+
+    #ServersPage QToolBar QToolButton {
+        background-color: #3498db;
+        padding: 8px 8px 6px 8px;
+        border: none;
+    }
+
+        #ServersPage QToolBar QToolButton:checked {
+            background-color: green;
+            margin: 0;
+            top: 0;
+            left: 0;
+        }
+
+
+#Side {
+    background-color: #fff;
+}
+
+#Caption {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 26px;
+}
+
+#Side QListView {
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+}
+
+    #Side QListView::item {
+        padding: 10px 10px 8px 10px;
+        border: 1px solid transparent;
+        color: #777;
+    }
+
+        #Side QListView::item:hover {
+            background-color: #e0efff;
+            color: #333;
+        }
+
+        #Side QListView::item:selected {
+            background-color: #caecf7;
+            color: #000;
+        }
+
+
+
+
+#Central {
+    background-color: #fff;
+}
+
+#Stack {
+    /*border-top: 1px solid #777;*/
+    /*    border: 1px solid red; */
+}
+
+#Title {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+StatusItemPane {
+    /*    border: 1px solid red; */
+}
+
+    StatusItemPane #Title {
+        font-size: 16px;
+    }
+
+    StatusItemPane #Detail {
+        padding-left: 18px;
+    }
+
+#LogsPage QPlainTextEdit {
+    border: none;
+    font: normal 15px Courier;
+}

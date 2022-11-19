@@ -8,6 +8,8 @@ class AppProxy;
 
 struct ClashApp
 {
+    static QString theme;
+
     static QApplication *app;
     static AppProxy *proxy;
     static ClashAppMainWindow *window;
